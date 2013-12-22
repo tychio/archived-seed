@@ -1,0 +1,53 @@
+// mixin
+prefix(p_name, argu...)
+    $prefixes = webkit moz ms o
+    for $prefix in $prefixes
+        -{$prefix}-{p_name} argu
+    {p_name} argu
+transform(p_attr, p_origin)
+    prefix(transform, p_attr)
+    prefix(transform-origin, p_origin)
+shadow(p_attr)
+    prefix(box-shadow, p_attr)
+radius(p_radius)
+    prefix(border-radius, p_radius)
+transition(p_type=all, p_second=0.5s)
+    prefix(transition, p_type, p_second)
+fontFace(p_font)
+    @font-face
+        font-family p_font
+        src url(/font/p_font.ttf) format("truetype")
+selection(p_bg=false, p_text=false, p_target='')
+    {p_target}::selection
+        if p_bg
+            background p_bg
+        if p_text
+            color p_text
+    {p_target}::-moz-selection
+        if p_bg
+            background p_bg
+        if p_text
+            color p_text
+sprite(p_name, p_x, p_y)
+    .{p_name}
+        background-position 0 - p_x 0 - p_y
+lineWrap(p_type='no')
+    if p_type == 'no'
+        white-space nowrap
+    else if p_type == 'auto'
+        word-wrap break-word
+        word-break normal
+    else if p_type == 'break'
+        word-break break-all
+bfc()
+    float left
+    position absolute
+    display inline-block
+    overflow auto
+ellipsis(p_width)
+    max-width p_width
+    text-overflow ellipsis
+    lineWrap()
+
+
+

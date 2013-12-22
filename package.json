@@ -1,0 +1,25 @@
+{
+    "name": "cruise",
+    "version": "0.1.0",
+    "description": "Front-end developer interview homework",
+    "author": "Tychio [code@tychio.net]",
+    "keywords": "cruise",
+    "devDependencies": {
+        "grunt": "~0.4.0",
+        "karma": "~0.10.4",
+        "karma-jasmine": "~0.1.3",
+        "karma-requirejs": "~0.1.0",
+        "karma-phantomjs-launcher": "~0.1.0",
+        "grunt-karma": "~0.6.2",
+        "grunt-contrib-watch": "~0.5.3",
+        "grunt-contrib-stylus": "~0.8.0",
+        "grunt-contrib-csslint": "~0.1.2",
+        "grunt-contrib-coffee": "~0.7.0",
+        "grunt-contrib-jshint": "~0.6.4",
+        "grunt-contrib-jade": "~0.8.0",
+        "grunt-contrib-imagemin": "~0.3.0"
+    },
+    "scripts": {
+        "test": "grunt test"
+    }
+}
