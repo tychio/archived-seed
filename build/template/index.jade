@@ -1,10 +1,4 @@
-- var baseUrl = './src/'
-- var pageTitle = 'Seed'
-- var emptyHref = '###'
-- var defaultImg = 'data:image/gif;base64,R0lGODlhPAA8AJEAAAAAAP///4iIiP///yH5BAEAAAMALAAAAAA8ADwAAAJAlI+py+0Po5y02ouz3rz7D4biSJbmiabqyrbuC8fyTNf2jef6zvf+DwwKh8Si8YhMKpfMpvMJjUqn1Kr1ihUVAAA7'
-!!! 5
-//if lt IE 9
-    script(type="text/javascript", src="src/lib/html5shiv/dist/html5shiv.js")
+doctype html
 html(lang="en")
     head
         - var author = 'Tychio'
@@ -15,6 +9,8 @@ html(lang="en")
         meta(name="auther", content=author)
         meta(name="keyword", content=keyword)
         link(type="text/css", rel="stylesheet", href=baseUrl + "css/style.css")
+        //if lt IE 9
+            script(type="text/javascript", src="src/lib/html5shiv/dist/html5shiv.js")
     body
         header(role="heading")
         main(role="main")
