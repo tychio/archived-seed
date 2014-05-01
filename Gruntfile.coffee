@@ -9,8 +9,8 @@ module.exports = (grunt) ->
                 files: 'src/css/*.css'
                 tasks: 'csslint'
             js:
-                files: 'build/coffee/*.coffee'
-                tasks: 'coffee'
+                files: 'build/javascript/*.js'
+                tasks: 'uglify'
             jshint:
                 files: 'src/js/*.js'
                 tasks: 'jshint:all'
@@ -25,7 +25,7 @@ module.exports = (grunt) ->
                     'unit/text-main.js',
                     'unit/spec/*Spec.js'
                 ]
-                tasks: 'karma:normal:run'
+                tasks: 'karma:normal'
         imagemin:
             img:
                 options:
@@ -50,6 +50,15 @@ module.exports = (grunt) ->
                         'build/style/footer.styl',
                         'build/style/dialog.styl'
                     ]
+        uglify:
+            compile:
+                options:
+                    beautify:
+                        width: 120
+                        beautify: true
+                files:
+                    'src/js/main.js': ['build/javascript/main.js']
+
         jade:
             compile:
                 options:
@@ -58,13 +67,9 @@ module.exports = (grunt) ->
                         debug: false
                 files:
                     'index.html': [
-                        'build/template/header.jade',
+                        'build/template/config.jade',
                         'build/template/index.jade'
                     ]
-        coffee:
-            compile:
-                files:
-                    'src/js/main.js': 'build/coffee/main.coffee'
         csslint:
             options:
                 csslintrc: '.csslintrc'
@@ -94,20 +99,21 @@ module.exports = (grunt) ->
                 configFile: 'karma.conf.js'
             normal:
                 singleRun: true,
-                browsers: ['Chrome']
+                browsers: ['PhantomJS']
             all:
                 browsers: ['Chrome', 'Firefox', 'IE']
 
     grunt.loadNpmTasks 'grunt-contrib-watch'
     grunt.loadNpmTasks 'grunt-contrib-imagemin'
     grunt.loadNpmTasks 'grunt-contrib-stylus'
+    grunt.loadNpmTasks 'grunt-contrib-uglify'
     grunt.loadNpmTasks 'grunt-contrib-csslint'
-    grunt.loadNpmTasks 'grunt-contrib-coffee'
+    grunt.loadNpmTasks 'grunt-contrib-requirejs'
     grunt.loadNpmTasks 'grunt-contrib-jshint'
     grunt.loadNpmTasks 'grunt-contrib-jade'
     grunt.loadNpmTasks 'grunt-karma'
 
-    grunt.registerTask 'test', ['karma:all']
+    grunt.registerTask 'test', ['karma:normal']
     grunt.registerTask 'hint', ['csslint', 'jshint:all']
-    grunt.registerTask 'compile', ['imagemin', 'stylus', 'jade', 'coffee']
+    grunt.registerTask 'compile', ['imagemin', 'stylus', 'jade', 'uglify']
     grunt.registerTask 'default', ['jshint:all', 'compile', 'csslint', 'karma:normal','watch']
