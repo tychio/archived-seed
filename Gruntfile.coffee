@@ -25,7 +25,7 @@ module.exports = (grunt) ->
                     'unit/text-main.js',
                     'unit/spec/*Spec.js'
                 ]
-                tasks: 'karma:normal'
+                tasks: 'test'
         imagemin:
             img:
                 options:
@@ -102,6 +102,13 @@ module.exports = (grunt) ->
                 browsers: ['PhantomJS']
             all:
                 browsers: ['Chrome', 'Firefox', 'IE']
+        clean:
+            test:
+                src: ['unit/coverage']
+            build:
+                src: ['src/css', 'src/img', 'src/js']
+            report:
+                src: ['report']
 
     grunt.loadNpmTasks 'grunt-contrib-watch'
     grunt.loadNpmTasks 'grunt-contrib-imagemin'
@@ -111,9 +118,11 @@ module.exports = (grunt) ->
     grunt.loadNpmTasks 'grunt-contrib-requirejs'
     grunt.loadNpmTasks 'grunt-contrib-jshint'
     grunt.loadNpmTasks 'grunt-contrib-jade'
+    grunt.loadNpmTasks 'grunt-contrib-clean'
     grunt.loadNpmTasks 'grunt-karma'
 
-    grunt.registerTask 'test', ['karma:normal']
+    grunt.registerTask 'reset', ['clean:test', 'clean:build', 'clean:report']
+    grunt.registerTask 'test', ['clean:test', 'karma:normal']
     grunt.registerTask 'hint', ['csslint', 'jshint:all']
-    grunt.registerTask 'compile', ['imagemin', 'stylus', 'jade', 'uglify']
+    grunt.registerTask 'build', ['imagemin', 'stylus', 'jade', 'uglify']
     grunt.registerTask 'default', ['jshint:all', 'compile', 'csslint', 'karma:normal','watch']
