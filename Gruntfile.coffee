@@ -109,8 +109,15 @@ module.exports = (grunt) ->
                 src: ['src/css', 'src/img', 'src/js']
             report:
                 src: ['report']
+        connect:
+            dev:
+                options:
+                    port: 3000
+                    hostname: 'localhost'
+                    open: 'http://localhost:3000'
 
     grunt.loadNpmTasks 'grunt-contrib-watch'
+    grunt.loadNpmTasks 'grunt-contrib-connect'
     grunt.loadNpmTasks 'grunt-contrib-imagemin'
     grunt.loadNpmTasks 'grunt-contrib-stylus'
     grunt.loadNpmTasks 'grunt-contrib-uglify'
@@ -122,7 +129,8 @@ module.exports = (grunt) ->
     grunt.loadNpmTasks 'grunt-karma'
 
     grunt.registerTask 'reset', ['clean:test', 'clean:build', 'clean:report']
+    grunt.registerTask 'server', ['connect:dev']
     grunt.registerTask 'test', ['clean:test', 'karma:normal']
     grunt.registerTask 'hint', ['csslint', 'jshint:all']
     grunt.registerTask 'build', ['imagemin', 'stylus', 'jade', 'uglify']
-    grunt.registerTask 'default', ['jshint:all', 'compile', 'csslint', 'karma:normal','watch']
+    grunt.registerTask 'default', ['build', 'hint', 'test', 'server', 'watch']
