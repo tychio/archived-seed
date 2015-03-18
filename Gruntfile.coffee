@@ -114,7 +114,9 @@ module.exports = (grunt) ->
                 options:
                     port: 3000
                     hostname: 'localhost'
+                    base: ''
                     open: 'http://localhost:3000'
+                    keepalive: true
 
     grunt.loadNpmTasks 'grunt-contrib-watch'
     grunt.loadNpmTasks 'grunt-contrib-connect'
